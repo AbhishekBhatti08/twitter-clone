@@ -127,6 +127,6 @@ app.post("/postTweet",(req,res)=>{
 
 // )
 
-app.listen(process.env.PORT || PORT, function(){
+app.listen(process.env.PORT || 4000, function(){
     console.log(`App running on ${port}`)
 });
