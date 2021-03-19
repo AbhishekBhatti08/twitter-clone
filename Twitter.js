@@ -12,11 +12,14 @@ app.use(express.json())
  app.use(express.urlencoded({ extended: true}));
 
 const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"1234",
-    database:"twitter"
+    host:"us-cdbr-east-03.cleardb.com",
+    user:"b47ffc2610cb5a",
+    password:"b79cc952",
+    database:"heroku_04bd7909d09f388"
 })
+
+// mysql://b47ffc2610cb5a:b79cc952@us-cdbr-east-03.cleardb.com/heroku_04bd7909d09f388?reconnect=true
+
 
 db.connect((err)=>{
     if(!err)
@@ -127,6 +130,6 @@ app.post("/postTweet",(req,res)=>{
 
 // )
 
-app.listen(process.env.PORT || 4000, function(){
+app.listen(process.env.PORT || 4000, ()=>{
     console.log(`App running on ${port}`)
 });
