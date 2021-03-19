@@ -2,6 +2,10 @@
   "name": "node",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "v12.18.3",
+    "npm": "7.6.1"
+  },
   "main": "Twitter.js",
   "scripts": {
     "start": "node Twitter.js",
