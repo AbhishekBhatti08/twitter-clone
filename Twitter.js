@@ -36,7 +36,7 @@ app.set("view engine","ejs");
 app.get('/',(req,res)=>{
     // var query = 'select tweet from tweettext';
 
-    var query = 'select * from tweettext';
+    var query = 'select * from heroku_04bd7909d09f388.tweettext';
 
     console.log("data received");
     
@@ -64,8 +64,8 @@ app.post("/postTweet",(req,res)=>{
     res.send(sendData);
     
     let data = req.body;
-    var sql = 'INSERT INTO tweettext SET ?';
-    var sort = 'select * from tweettext order by ts desc';
+    var sql = 'INSERT INTO heroku_04bd7909d09f388.tweettext SET ?';
+    // var sort = 'select * from heroku_04bd7909d09f388.tweettext order by ts desc';
         console.log(req.body);
 
         console.log(sql);
