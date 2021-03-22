@@ -27,7 +27,7 @@ db.connect((err)=>{
 });
 
 
-const port = 4000;
+const Port = process.env.PORT || 4000;
 
 app.use(express.static('public'))
 app.set("view engine","ejs");
@@ -131,5 +131,5 @@ app.post("/postTweet",(req,res)=>{
 // )
 
 app.listen(process.env.PORT || 4000, ()=>{
-    console.log(`App running on ${port}`)
+    console.log(`App running on ${Port}`)
 });
