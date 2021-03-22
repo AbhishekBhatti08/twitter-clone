@@ -1,1 +1,1 @@
-web: node Twitter.js
+web: npm start
