@@ -70,7 +70,7 @@ app.post("/postTweet",(req,res)=>{
 
         console.log(sql);
         
-        db.query(sql,data,(err,results)=>{
+        setInterval(()=>{ db.query(sql,data,(err,results)=>{
             if(err){
                 console.log("Tweet not saved!")
             }
@@ -82,7 +82,7 @@ app.post("/postTweet",(req,res)=>{
             }
             
           
-        })   
+        })},5000)   
         // setTimeout(() => {
         //     res.redirect("http://localhost:3000");
         // }, 1000);
