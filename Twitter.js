@@ -130,6 +130,6 @@ app.post("/postTweet",(req,res)=>{
 
 // )
 
-app.listen(process.env.PORT || 4000, ()=>{
+app.listen(PORT, ()=>{
     console.log(`App running on ${Port}`)
 });
