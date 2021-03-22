@@ -21,11 +21,35 @@ const db = mysql.createConnection({
 // mysql://b47ffc2610cb5a:b79cc952@us-cdbr-east-03.cleardb.com/heroku_04bd7909d09f388?reconnect=true
 
 
+//Code from online to debug issues- starts
+
+var connection;
+
+function handleDisconnect() {
+  connection = mysql.createConnection(db);
+
+
 db.connect((err)=>{
-    if(!err)
-    console.log("all good bud! -> DB running")
+    if(!err) {
+    console.log("all good bud! -> DB running")}
+
+    else if(err) {                                    
+        console.log('error when connecting to db:', err);
+        setTimeout(handleDisconnect, 2000); 
+      }
 });
 
+connection.on('error', function(err) {
+    console.log('db error', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+      handleDisconnect();                         // lost due to either server restart, or a
+    } else {                                      // connnection idle timeout (the wait_timeout
+      throw err;                                  // server variable configures this)
+    }
+  });
+}
+
+handleDisconnect();
 
 const Port = process.env.PORT || 4000;
 
@@ -83,52 +107,10 @@ app.post("/postTweet",(req,res)=>{
             
           
         })},5000)   
-        // setTimeout(() => {
-        //     res.redirect("http://localhost:3000");
-        // }, 1000);
         
 
 });
 
-
-// app.post("/postTweet",(req,res)=>{
-//     console.log("hello");
-//     console.log(req.body);
-//     var data = req.body;
-//     console.log(data);
-
-//     res.send('data from backend');
-
-//     var sql = `insert into tweets set ?`;
-//     var sort = 'select * from tweets order by ts desc';
-    
-//     console.log(req.body);
-//     db.query(sql,data,(err,results)=>{
-//         if(err){
-//             console.log("Tweet not saved!")
-//         }
-//         else{    
-//                 db.query(sort,(err,result)=>{
-//                 if (err) {throw err,
-//                 console.log("Tweet saved!")
-//                 }
-
-//                 else {
-//                     return result;
-//                 }
-//             });
-//         }
-    
-//     })   
-//     setTimeout(() => {
-//         res.redirect("http://localhost:3000");
-//     }, 1000);
-    
-
-// }
-
-
-// )
 
 app.listen(process.env.PORT || 4000, ()=>{
     console.log(`App running on ${Port}`)
