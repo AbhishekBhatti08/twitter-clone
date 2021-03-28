@@ -84,8 +84,7 @@ app.post("/postTweet",(req,res)=>{
     console.log(req.header('Content-Type'))
     console.log("Post Request Reached");
     console.log("req" , req.body.text);
-    let sendData = "Hello";
-    res.send(sendData);
+    
     
     let data = req.body;
     var sql = 'INSERT INTO heroku_04bd7909d09f388.tweettext SET ?';
@@ -94,7 +93,7 @@ app.post("/postTweet",(req,res)=>{
 
         console.log(sql);
         
-        setInterval(()=>{ db.query(sql,data,(err,results)=>{
+        db.query(sql,data,(err,results)=>{
             if(err){
                 console.log("Tweet not saved!")
             }
@@ -102,12 +101,14 @@ app.post("/postTweet",(req,res)=>{
             {    
                
                console.log("Tweet Saved");
+               res.sendStatus(200);
                            
             }
             
           
-        })},5000)   
+        })   
         
+        res.status(200).json({ message: 'Hello'});
 
 });
 
